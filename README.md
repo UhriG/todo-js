@@ -1,6 +1,6 @@
-# Webpack Starter
+# TODO App JS
 
-Este es el proyecto inicial para crear aplicaciones utilizando webpack.
+Aplicación simple de tareas realizada con JS utilizando clases, manipulación del DOM y localStorage.
 
 ### Notas:
 
