@@ -1,6 +1,15 @@
-import { saludar } from './js/componentes';
 import './styles.css';
+import { Todo, TodoList } from './classes';
+import { crearTodoHtml } from './js/componentes';
 
-const nombre = 'Cristian Uhrig';
+export const todoList = new TodoList();
 
-saludar(nombre);
+/* todoList.todos.forEach((todo) => {
+	crearTodoHtml(todo);
+}); 
+ Es lo mismo qe la linea de abajo
+*/
+
+todoList.todos.forEach(crearTodoHtml);
+// todoList.todos[0].imprimirClase();
+// console.log('todos: ', todoList.todos);
