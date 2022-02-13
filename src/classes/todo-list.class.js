@@ -8,11 +8,13 @@ export class TodoList {
 	nuevoTodo(todo) {
 		this.todos.push(todo);
 		this.guardarLocalStorage();
+		this.cantidadPendientes();
 	}
 
 	eliminarTodo(id) {
 		this.todos = this.todos.filter((todo) => todo.id !== id);
 		this.guardarLocalStorage();
+		this.cantidadPendientes();
 	}
 
 	estadoTodo(id) {
@@ -23,6 +25,7 @@ export class TodoList {
 			}
 		}
 		this.guardarLocalStorage();
+		this.cantidadPendientes();
 	}
 
 	eliminarCompletados() {
@@ -41,5 +44,11 @@ export class TodoList {
 
 		this.todos = this.todos.map((obj) => Todo.fromJSON(obj));
 		// this.todos = this.todos.map(Todo.fromJSON);
+	}
+
+	cantidadPendientes() {
+		let pendientes = [];
+		pendientes = this.todos.filter((todo) => !todo.completado);
+		return pendientes.length;
 	}
 }

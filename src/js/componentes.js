@@ -7,6 +7,7 @@ const txtInput = document.querySelector('.new-todo');
 const btnBorrarCompletados = document.querySelector('.clear-completed');
 const ulFilter = document.querySelector('.filters');
 const aFiltros = document.querySelectorAll('.filtro');
+const pendientes = document.querySelector('.todo-count');
 
 export const crearTodoHtml = (todo) => {
 	const htmlTodo = `
@@ -25,8 +26,13 @@ export const crearTodoHtml = (todo) => {
 	div.innerHTML = htmlTodo;
 
 	divTodoList.append(div.firstElementChild); // Inserta el primer hijo del elemento div, en este caso en vez de insertar <div><li>.. inserta directamente el <li> que es lo que queríamos lograr
-
+	todoPendientes();
 	return div.firstElementChild;
+};
+
+const todoPendientes = () => {
+	const nPendientes = todoList.cantidadPendientes();
+	pendientes.children[0].innerHTML = nPendientes;
 };
 
 // EVENTOS
@@ -38,6 +44,7 @@ txtInput.addEventListener('keyup', (event) => {
 
 		crearTodoHtml(nuevoTodo);
 		txtInput.value = '';
+		todoPendientes();
 	}
 });
 
@@ -51,13 +58,13 @@ divTodoList.addEventListener('click', (event) => {
 		// Click en el check
 		todoList.estadoTodo(todoId);
 		todoElemento.classList.toggle('completed');
+		todoPendientes();
 	} else if (nombreElemento.includes('button')) {
 		// Click en el botón de cerrar
 		todoList.eliminarTodo(todoId);
 		divTodoList.removeChild(todoElemento);
+		todoPendientes();
 	}
-
-	console.log(todoList);
 });
 
 btnBorrarCompletados.addEventListener('click', () => {
@@ -70,6 +77,7 @@ btnBorrarCompletados.addEventListener('click', () => {
 			divTodoList.removeChild(elemento);
 		}
 	}
+	todoPendientes();
 });
 
 ulFilter.addEventListener('click', (event) => {
